@@ -1,21 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Dashboard } from './src/screens/dashboard';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>asdad</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+      <StatusBar />
+      <Dashboard />
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
