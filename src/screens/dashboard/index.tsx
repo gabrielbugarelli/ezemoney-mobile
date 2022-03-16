@@ -1,14 +1,14 @@
 import { Text } from 'react-native';
 
 //styles components
-import { Container } from './styles';
+import { Container, Title } from './styles';
 
 export const Dashboard = () => {
   return (
     <Container>
-      <Text>
+      <Title>
         Tela Dashboard
-      </Text>
+      </Title>
     </Container>
   )
 }
