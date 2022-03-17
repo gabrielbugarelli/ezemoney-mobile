@@ -10,7 +10,8 @@ import {
   Photo,
   User,
   UserGreeting,
-  UserName
+  UserName,
+  HighLightCards
 } from './styles';
 
 export const Dashboard = () => {
@@ -30,7 +31,11 @@ export const Dashboard = () => {
         </UserWrapper>
       </Header>
 
-      <HighLightCard />
+      <HighLightCards>
+        <HighLightCard />
+        <HighLightCard />
+        <HighLightCard />
+      </HighLightCards>
     </Container>
   )
 }
