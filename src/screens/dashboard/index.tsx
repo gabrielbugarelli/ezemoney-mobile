@@ -4,6 +4,7 @@ import {
   Header,
   UserWrapper,
   UserInfo,
+  IconPower,
   Photo,
   User,
   UserGreeting,
@@ -22,6 +23,8 @@ export const Dashboard = () => {
               <UserName>Gabriel!</UserName>
             </User>
           </UserInfo>
+
+          <IconPower name="power" />
         </UserWrapper>
       </Header>
     </Container>
