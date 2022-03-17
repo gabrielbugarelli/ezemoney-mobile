@@ -1,3 +1,5 @@
+import { HighLightCard } from '../../components/HighLightCard';
+
 //styles components
 import { 
   Container,
@@ -27,6 +29,8 @@ export const Dashboard = () => {
           <IconPower name="power" />
         </UserWrapper>
       </Header>
+
+      <HighLightCard />
     </Container>
   )
 }
