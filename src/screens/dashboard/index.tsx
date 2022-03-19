@@ -32,9 +32,26 @@ export const Dashboard = () => {
       </Header>
 
       <HighLightCards>
-        <HighLightCard />
-        <HighLightCard />
-        <HighLightCard />
+        <HighLightCard
+          title="Entradas"
+          amount="R$: 10.345,00"
+          lastTransaction="10/02/2022"
+          typeTransaction='down'
+        />
+        
+        <HighLightCard
+          title="Despesas"
+          amount="R$: 3.800,00"
+          lastTransaction="16/03/2022"
+          typeTransaction='up'
+        />
+
+        <HighLightCard
+          title="Receita Total"
+          amount="R$: 23.650,00"
+          lastTransaction="16/03/2022"
+          typeTransaction='total'
+        />
       </HighLightCards>
     </Container>
   )

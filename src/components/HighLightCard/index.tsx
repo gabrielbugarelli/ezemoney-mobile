@@ -8,17 +8,35 @@ import {
   LastTransaction
 } from './styles';
 
-export const HighLightCard = () => {
+type HighLightCardProps = {
+  title: string;
+  amount:string;
+  lastTransaction: string;
+  typeTransaction: 'up' | 'down' | 'total';
+}
+
+const iconTransactionType = {
+  up: 'arrow-up-circle',
+  down: 'arrow-down-circle',
+  total: 'dollar-sign'
+}
+
+export const HighLightCard = ({ title, amount, lastTransaction, typeTransaction }: HighLightCardProps) => {
+
   return (
-    <Container>
+    <Container type={typeTransaction}>
       <Header>
-        <Title> Entrada </Title>
-        <Icon name="arrow-up-circle"/>
+        <Title type={typeTransaction}> {title} </Title>
+
+        <Icon
+          name={iconTransactionType[typeTransaction]}
+          type={typeTransaction}
+        />
       </Header>
 
       <Footer>
-        <Amount>R$: 17.400,00</Amount>
-        <LastTransaction>Última entrada foi dia 13 de abril</LastTransaction>
+        <Amount type={typeTransaction}> {amount} </Amount>
+        <LastTransaction type={typeTransaction}> {lastTransaction} </LastTransaction>
       </Footer>
     </Container>
   )
