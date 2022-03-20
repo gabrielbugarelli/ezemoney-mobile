@@ -10,12 +10,13 @@ import {
 } from "./styles";
 
 type CategoryProps = {
-  type: 'receita' | 'despesa';
+  type: string;
   icon: string;
 }
 
 type TransactionCardProps = {
   data: {
+    type: 'receita' | 'despesa';
     title: string,
     amount: string,
     category: CategoryProps,
@@ -28,7 +29,10 @@ export const TransactionCard = ( {data}: TransactionCardProps ) => {
     <Container>
       <Title>{data.title}</Title>
 
-      <Amount>{data.amount}</Amount>
+      <Amount type={data.type} >
+      {data.type === 'despesa' && '- '}
+      {data.amount}
+      </Amount>
 
       <Footer>
         <Category>

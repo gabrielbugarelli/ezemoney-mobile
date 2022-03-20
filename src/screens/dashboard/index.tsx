@@ -22,27 +22,31 @@ export const Dashboard = () => {
 
   const data = [
     {
-      title: 'Desenvolvimento de sites',
+      type: 'receita',
+      title: 'Desenvolvimento de ecommerce',
       amount: 'R$: 12.500,00',
-      category: {icon: 'dollar-sign', type: 'despesa'},
+      category: {icon: 'arrow-right', type: 'receita'},
       date: '12/04/2022',
     },
     {
-      title: 'Desenvolvimento de sites',
-      amount: 'R$: 12.500,00',
-      category: {icon: 'dollar-sign', type: 'receita'},
+      type: 'despesa',
+      title: 'Agiota',
+      amount: 'R$: 5.230,00',
+      category: {icon: 'arrow-left', type: 'despesa'},
       date: '12/04/2022',
     },
     {
-      title: 'Desenvolvimento de sites',
-      amount: 'R$: 12.500,00',
-      category: {icon: 'dollar-sign', type: 'receita'},
+      type: 'receita',
+      title: 'Desenvolvimento de landing page',
+      amount: 'R$: 3.400,00',
+      category: {icon: 'arrow-right', type: 'receita'},
       date: '12/04/2022',
     },
     {
-      title: 'Desenvolvimento de sites',
-      amount: 'R$: 12.500,00',
-      category: {icon: 'dollar-sign', type: 'receita'},
+      type: 'despesa',
+      title: 'Pensão',
+      amount: 'R$: 1.200,00',
+      category: {icon: 'arrow-left', type: 'despesa'},
       date: '12/04/2022',
     },
   ]
