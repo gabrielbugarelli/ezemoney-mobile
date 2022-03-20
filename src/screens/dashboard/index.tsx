@@ -14,10 +14,39 @@ import {
   UserName,
   HighLightCards,
   Transactions,
-  Title
+  Title,
+  TransactionsList
 } from './styles';
 
 export const Dashboard = () => {
+
+  const data = [
+    {
+      title: 'Desenvolvimento de sites',
+      amount: 'R$: 12.500,00',
+      category: {icon: 'dollar-sign', type: 'despesa'},
+      date: '12/04/2022',
+    },
+    {
+      title: 'Desenvolvimento de sites',
+      amount: 'R$: 12.500,00',
+      category: {icon: 'dollar-sign', type: 'receita'},
+      date: '12/04/2022',
+    },
+    {
+      title: 'Desenvolvimento de sites',
+      amount: 'R$: 12.500,00',
+      category: {icon: 'dollar-sign', type: 'receita'},
+      date: '12/04/2022',
+    },
+    {
+      title: 'Desenvolvimento de sites',
+      amount: 'R$: 12.500,00',
+      category: {icon: 'dollar-sign', type: 'receita'},
+      date: '12/04/2022',
+    },
+  ]
+
   return (
     <Container>
       <Header>
@@ -59,9 +88,13 @@ export const Dashboard = () => {
       </HighLightCards>
 
       <Transactions>
-        <Title>Listagem</Title>
+        <Title>Transações</Title>
 
-        <TransactionCard />
+        <TransactionsList
+          data={data}
+          renderItem={({item}) => <TransactionCard data={item} />}
+          showsVerticalScrollIndicator={false}
+        />
       </Transactions>
     </Container>
   )
