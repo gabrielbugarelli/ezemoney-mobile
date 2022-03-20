@@ -14,6 +14,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Dashboard } from './src/screens/dashboard';
 
 import theme from './src/global/styles/theme';
+import { Register } from './src/screens/register';
 
 export default function App() {
 
@@ -30,7 +31,8 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <StatusBar />
-      <Dashboard />
+      {/* <Dashboard /> */}
+      <Register />
     </ThemeProvider>
   );
 }
