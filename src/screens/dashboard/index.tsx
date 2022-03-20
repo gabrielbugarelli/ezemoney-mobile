@@ -1,5 +1,5 @@
 import { HighLightCard } from '../../components/HighLightCard';
-import { TransactionCard } from '../../components/TransactionCard';
+import { TransactionCard, TransactionCardProps } from '../../components/TransactionCard';
 
 //styles components
 import { 
@@ -18,10 +18,14 @@ import {
   TransactionsList
 } from './styles';
 
-export const Dashboard = () => {
+export interface DataListProps extends TransactionCardProps {
+  id: string;
+};
 
-  const data = [
+export const Dashboard = () => {
+  const data: DataListProps[] = [
     {
+      id: String(Math.random()),
       type: 'receita',
       title: 'Desenvolvimento de ecommerce',
       amount: 'R$: 12.500,00',
@@ -29,6 +33,7 @@ export const Dashboard = () => {
       date: '12/04/2022',
     },
     {
+      id: String(Math.random()),
       type: 'despesa',
       title: 'Agiota',
       amount: 'R$: 5.230,00',
@@ -36,6 +41,7 @@ export const Dashboard = () => {
       date: '12/04/2022',
     },
     {
+      id: String(Math.random()),
       type: 'receita',
       title: 'Desenvolvimento de landing page',
       amount: 'R$: 3.400,00',
@@ -43,6 +49,7 @@ export const Dashboard = () => {
       date: '12/04/2022',
     },
     {
+      id: String(Math.random()),
       type: 'despesa',
       title: 'Pensão',
       amount: 'R$: 1.200,00',
@@ -96,6 +103,7 @@ export const Dashboard = () => {
 
         <TransactionsList
           data={data}
+          keyExtractor={item => item.id}
           renderItem={({item}) => <TransactionCard data={item} />}
           showsVerticalScrollIndicator={false}
         />

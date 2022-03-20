@@ -14,7 +14,7 @@ type CategoryProps = {
   icon: string;
 }
 
-type TransactionCardProps = {
+export type TransactionCardProps = {
   data: {
     type: 'receita' | 'despesa';
     title: string,
