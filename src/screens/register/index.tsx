@@ -1,6 +1,7 @@
 import { Button } from '../../components/Form/Button';
 import { Input } from '../../components/Form/Input';
-import { Container, Header, Title, Form, Fields} from './styles';
+import { TransactionTypeButton } from '../../components/Form/TransactionTypeButton';
+import { Container, Header, Title, Form, Fields, TransactionsTypes} from './styles';
 
 export const Register = () => {
   return (
@@ -17,6 +18,17 @@ export const Register = () => {
           <Input 
             placeholder="Valor"
           />
+        
+          <TransactionsTypes>
+            <TransactionTypeButton
+              title='Receita'
+              icon='receita'
+            />
+            <TransactionTypeButton
+              title='Despesa'
+              icon='despesa'
+            />
+          </TransactionsTypes>
         </Fields>
 
         <Button title="Cadastrar" />
