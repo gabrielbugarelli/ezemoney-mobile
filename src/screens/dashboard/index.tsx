@@ -1,4 +1,5 @@
 import { HighLightCard } from '../../components/HighLightCard';
+import { TransactionCard } from '../../components/TransactionCard';
 
 //styles components
 import { 
@@ -11,7 +12,9 @@ import {
   User,
   UserGreeting,
   UserName,
-  HighLightCards
+  HighLightCards,
+  Transactions,
+  Title
 } from './styles';
 
 export const Dashboard = () => {
@@ -52,7 +55,14 @@ export const Dashboard = () => {
           lastTransaction="16/03/2022"
           typeTransaction='total'
         />
+
       </HighLightCards>
+
+      <Transactions>
+        <Title>Listagem</Title>
+
+        <TransactionCard />
+      </Transactions>
     </Container>
   )
 }
