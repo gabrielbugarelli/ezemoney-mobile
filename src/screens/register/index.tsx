@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Button } from '../../components/Form/Button';
 import { Input } from '../../components/Form/Input';
+import { SelectCategory } from '../../components/Form/SelectCategory';
 import { TransactionTypeButton } from '../../components/Form/TransactionTypeButton';
 import { Container, Header, Title, Form, Fields, TransactionsTypes} from './styles';
 
@@ -20,7 +21,7 @@ export const Register = () => {
       <Form>
         <Fields>
           <Input 
-            placeholder="Nome"
+            placeholder="Descrição"
           />
           <Input 
             placeholder="Valor"
@@ -41,6 +42,10 @@ export const Register = () => {
               isActive={transactionType === 'despesa'}
             />
           </TransactionsTypes>
+
+          <SelectCategory 
+            title='Categoria'
+          />
         </Fields>
 
         <Button title="Cadastrar" />
