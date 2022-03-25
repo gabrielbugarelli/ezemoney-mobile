@@ -2,12 +2,13 @@ import { Container, Category, Icon } from "./styles";
 
 type SelectCategory = {
   title: string;
+  onPress: () => void;
 }
 
-export const SelectCategory = ({title}: SelectCategory) => {
+export const SelectCategoryButton = ({title, onPress}: SelectCategory) => {
 
   return (
-    <Container>
+    <Container onPress={onPress}>
       <Category>{title}</Category>
       <Icon name="chevron-down" />
     </Container>

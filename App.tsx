@@ -15,7 +15,6 @@ import { Dashboard } from './src/screens/dashboard';
 
 import theme from './src/global/styles/theme';
 import { Register } from './src/screens/register';
-import { CategorySelect } from './src/screens/CategorySelect';
 
 export default function App() {
 
@@ -33,8 +32,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <StatusBar />
       {/* <Dashboard /> */}
-      {/* <Register /> */}
-      <CategorySelect />
+      <Register />
     </ThemeProvider>
   );
 }

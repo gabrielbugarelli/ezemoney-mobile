@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { FlatList } from "react-native";
 import { Button } from "../../components/Form/Button";
 
@@ -20,17 +19,17 @@ type CategoryType = {
   name: string;
 }
 
-interface CategorySelectProps extends CategoryType {
-  category: string;
+type CategorySelectProps = {
+  category: CategoryType;
   setCategory: (category: CategoryType) => void;
   closeSelectCategory: () => void;
 }
 
-export const CategorySelect = ({}: CategorySelectProps ) => {
+export const CategorySelect = ({ category, setCategory, closeSelectCategory }: CategorySelectProps ) => {
 
-  useEffect(() => {
-
-  }, [])
+  const handleCategorySelect = (category: CategoryType) => {
+    setCategory(category);
+  }
 
   return (
     <Container>
@@ -42,9 +41,18 @@ export const CategorySelect = ({}: CategorySelectProps ) => {
         data={categories}
         keyExtractor={(item) => item.key}
         renderItem={({item}) => (
-          <Category>
-            <Icon name={item.icon} />
-            <Name>{item.name}</Name>
+          <Category
+            onPress={() => handleCategorySelect(item)}
+          >
+            <Icon 
+              name={item.icon}
+              isActive={category.key === item.key}
+            />
+            <Name
+              isActive={category.key === item.key}
+            > 
+              {item.name}
+            </Name>
           </Category>
         )}
 
@@ -52,7 +60,10 @@ export const CategorySelect = ({}: CategorySelectProps ) => {
       />
 
         <Footer>
-          <Button title="Selecionar" />
+          <Button 
+            title="Selecionar"
+            onPress={closeSelectCategory}
+          />
         </Footer>
     </Container>
   )
