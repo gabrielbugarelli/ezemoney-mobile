@@ -6,6 +6,7 @@ import {
   Container,
   Header,
   UserWrapper,
+  LogoutButton,
   UserInfo,
   IconPower,
   Photo,
@@ -15,7 +16,7 @@ import {
   HighLightCards,
   Transactions,
   Title,
-  TransactionsList
+  TransactionsList,
 } from './styles';
 
 export interface DataListProps extends TransactionCardProps {
@@ -70,7 +71,9 @@ export const Dashboard = () => {
             </User>
           </UserInfo>
 
-          <IconPower name="power" />
+          <LogoutButton>
+            <IconPower name="power" />
+          </LogoutButton>
         </UserWrapper>
       </Header>
 
@@ -95,7 +98,6 @@ export const Dashboard = () => {
           lastTransaction="16/03/2022"
           typeTransaction='total'
         />
-
       </HighLightCards>
 
       <Transactions>

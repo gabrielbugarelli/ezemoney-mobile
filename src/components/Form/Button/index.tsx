@@ -6,11 +6,12 @@ import {
 
 interface ButtonProps extends TouchableOpacityProps {
   title: string;
+  onPress: () => void;
 }
 
-export const Button = ({title, ...rest}: ButtonProps) => {
+export const Button = ({title, onPress, ...rest}: ButtonProps) => {
   return (
-    <Container {...rest}>
+    <Container onPress={onPress} {...rest}>
       <Title>{title}</Title>
     </Container>
   );

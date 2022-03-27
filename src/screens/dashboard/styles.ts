@@ -33,6 +33,9 @@ export const UserWrapper = styled.View`
   align-items: center;
 `;
 
+export const LogoutButton = styled.TouchableOpacity`
+`;
+
 export const UserInfo = styled.View`
   flex-direction: row;
   align-items: center;
