@@ -73,7 +73,7 @@ export const Register = () => {
       return Alert.alert('Selecione uma categoria!');
     }
 
-    const dataFormRegister = {
+    const newTransactionData = {
       name: form.name,
       amount: form.amount,
       transactionType,
@@ -81,7 +81,15 @@ export const Register = () => {
     }
 
     try {
-      await AsyncStorage.setItem(dataKey, JSON.stringify(dataFormRegister));
+      const data = await AsyncStorage.getItem(dataKey);
+      const currentData = data ? JSON.parse(data) : [];
+
+      const dataFormatted = [
+        ...currentData,
+        newTransactionData
+      ]
+
+      await AsyncStorage.setItem(dataKey, JSON.stringify(dataFormatted));
 
     } catch (error) {
       console.log(`Erro ao cadastrar o lançamento: ${error}`);
@@ -91,11 +99,17 @@ export const Register = () => {
 
   useEffect(() => {
     const loadData = async () => {
-        const data = await AsyncStorage.getItem(dataKey);
-        console.log(data);
-      }
+      const data = await AsyncStorage.getItem(dataKey);
+      console.log(data);
+    }
       
     loadData();
+
+    //deleta dados do Async Storage
+    // (async () => {
+    //   await AsyncStorage.removeItem(dataKey);
+    // })
+
   }, []);
 
   return (
