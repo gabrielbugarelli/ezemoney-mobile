@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { Alert, Keyboard, Modal, TouchableWithoutFeedback } from 'react-native';
 import { Button } from '../../components/Form/Button';
 import { InputForm } from '../../components/Form/InputForm';
@@ -36,6 +39,8 @@ const schema = Yup.object().shape({
 })
 
 export const Register = () => {
+  const dataKey = '@gofinances:transactions';
+
   const [ transactionType, setTransactionType ] = useState('');
   const [ openCategoryModal, setOpenCategoryModal ] = useState(false);
   const [ category, setCategory ] = useState({
@@ -59,7 +64,7 @@ export const Register = () => {
     setOpenCategoryModal(true);
   }
 
-  const handleSubmitRegister = (form: FormData) => {
+  const handleSubmitRegister = async (form: FormData) => {
     if(!transactionType) {
       return Alert.alert('Selecione o tipo de transação!');
     }
@@ -75,8 +80,23 @@ export const Register = () => {
       category: category.key
     }
 
-    console.log('Log: dataFormRegister', dataFormRegister);
+    try {
+      await AsyncStorage.setItem(dataKey, JSON.stringify(dataFormRegister));
+
+    } catch (error) {
+      console.log(`Erro ao cadastrar o lançamento: ${error}`);
+      Alert.alert('Não foi possível cadastrar o lançamento!');
+    }
   }
+
+  useEffect(() => {
+    const loadData = async () => {
+        const data = await AsyncStorage.getItem(dataKey);
+        console.log(data);
+      }
+      
+    loadData();
+  }, []);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
