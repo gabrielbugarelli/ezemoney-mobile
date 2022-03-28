@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
-
+import uuid from 'react-native-uuid';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import { useForm } from 'react-hook-form';
+import { useNavigation } from '@react-navigation/native';
 
 import { Alert, Keyboard, Modal, TouchableWithoutFeedback } from 'react-native';
 import { Button } from '../../components/Form/Button';
@@ -40,6 +42,7 @@ const schema = Yup.object().shape({
 
 export const Register = () => {
   const dataKey = '@gofinances:transactions';
+  const navigation = useNavigation();
 
   const [ transactionType, setTransactionType ] = useState('');
   const [ openCategoryModal, setOpenCategoryModal ] = useState(false);
@@ -48,7 +51,7 @@ export const Register = () => {
     name: 'Categoria',
   })
 
-  const { control, handleSubmit, formState: { errors }} = useForm({
+  const { control, reset, handleSubmit, formState: { errors }} = useForm({
     resolver: yupResolver(schema)
   });
 
@@ -74,10 +77,12 @@ export const Register = () => {
     }
 
     const newTransactionData = {
+      id: String(uuid.v4()),
       name: form.name,
       amount: form.amount,
       transactionType,
-      category: category.key
+      category: category.key,
+      date: new Date()
     }
 
     try {
@@ -90,6 +95,15 @@ export const Register = () => {
       ]
 
       await AsyncStorage.setItem(dataKey, JSON.stringify(dataFormatted));
+
+      reset(); //reseta os campos do React Hook Form
+      setTransactionType('');
+      setCategory({
+        key: 'category',
+        name: 'Categoria',
+      });
+
+      navigation.navigate('Transações');
 
     } catch (error) {
       console.log(`Erro ao cadastrar o lançamento: ${error}`);
