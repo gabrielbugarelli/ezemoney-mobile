@@ -1,3 +1,6 @@
+import { useEffect, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { HighLightCard } from '../../components/HighLightCard';
 import { TransactionCard, TransactionCardProps } from '../../components/TransactionCard';
 
@@ -18,46 +21,56 @@ import {
   Title,
   TransactionsList,
 } from './styles';
+import { Alert } from 'react-native';
 
 export interface DataListProps extends TransactionCardProps {
   id: string;
 };
 
 export const Dashboard = () => {
-  const data: DataListProps[] = [
-    {
-      id: String(Math.random()),
-      type: 'receita',
-      title: 'Desenvolvimento de ecommerce',
-      amount: 'R$: 12.500,00',
-      category: {icon: 'arrow-right', type: 'receita'},
-      date: '12/04/2022',
-    },
-    {
-      id: String(Math.random()),
-      type: 'despesa',
-      title: 'Agiota',
-      amount: 'R$: 5.230,00',
-      category: {icon: 'arrow-left', type: 'despesa'},
-      date: '12/04/2022',
-    },
-    {
-      id: String(Math.random()),
-      type: 'receita',
-      title: 'Desenvolvimento de landing page',
-      amount: 'R$: 3.400,00',
-      category: {icon: 'arrow-right', type: 'receita'},
-      date: '12/04/2022',
-    },
-    {
-      id: String(Math.random()),
-      type: 'despesa',
-      title: 'Pensão',
-      amount: 'R$: 1.200,00',
-      category: {icon: 'arrow-left', type: 'despesa'},
-      date: '12/04/2022',
-    },
-  ]
+  const dataKey = '@gofinances:transactions';
+  const [ data, setData ] = useState<DataListProps[]>([]);
+
+  const loadTransactions = async () => {
+    const response = await AsyncStorage.getItem(dataKey);
+    const transactions = response ? JSON.parse(response) : [];
+
+    const transactionsFormatted: DataListProps[] = transactions.map((item: DataListProps) => {
+      /**
+       * @description CORRIGIR BUG:
+       * Listar o valor da transaction formatada em Real
+       * 
+       * @description CORRIGIR BUG:
+       * Listar o data da transaction formatada
+       */
+
+      const amount = Number(item.amount).toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+      });
+
+      // const date = Intl.DateTimeFormat('pt-BR', {
+      //   day: '2-digit',
+      //   month: '2-digit',
+      //   year: '2-digit'
+      // }).format(new Date(item.date));
+
+      return {
+        id: item.id,
+        name: item.name,
+        amount,
+        date: item.date,
+        category: item.category,
+        type: item.type,
+      }
+    });
+
+    setData(transactionsFormatted);
+  }
+
+  useEffect(() => {
+    loadTransactions();
+  }, []);
 
   return (
     <Container>
@@ -106,7 +119,18 @@ export const Dashboard = () => {
         <TransactionsList
           data={data}
           keyExtractor={item => item.id}
-          renderItem={({item}) => <TransactionCard data={item} />}
+          renderItem={({item}) => {
+            return (
+              <TransactionCard 
+                amount={item.amount} 
+                category={item.category} 
+                date={item.date}
+                name={item.name}
+                type={item.type}
+                key={item.key}
+              />
+            )
+          }}
           showsVerticalScrollIndicator={false}
         />
       </Transactions>

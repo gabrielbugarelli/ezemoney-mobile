@@ -114,15 +114,16 @@ export const Register = () => {
   useEffect(() => {
     const loadData = async () => {
       const data = await AsyncStorage.getItem(dataKey);
-      console.log(data);
     }
-      
+    
     loadData();
 
     //deleta dados do Async Storage
     // (async () => {
     //   await AsyncStorage.removeItem(dataKey);
-    // })
+    //   console.log('deletou');
+      
+    // })();
 
   }, []);
 

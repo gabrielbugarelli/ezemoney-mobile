@@ -15,31 +15,29 @@ type CategoryProps = {
 }
 
 export type TransactionCardProps = {
-  data: {
     type: 'receita' | 'despesa';
-    title: string,
+    name: string,
     amount: string,
     category: CategoryProps,
     date: string,
-  }
 }
 
-export const TransactionCard = ( {data}: TransactionCardProps ) => {
+export const TransactionCard = ( props: TransactionCardProps ) => {
   return (
     <Container>
-      <Title>{data.title}</Title>
+      <Title>{props.name}</Title>
 
-      <Amount type={data.type} >
-      {data.type === 'despesa' && '- '}
-      {data.amount}
+      <Amount type={props.type} >
+      {props.type === 'despesa' && '- '}
+      {props.amount}
       </Amount>
 
       <Footer>
         <Category>
-          <Icon name={data.category.icon} />
-          <CategoryName>{data.category.type}</CategoryName>
+          <Icon name={props.category.icon} />
+          <CategoryName>{props.category.type}</CategoryName>
         </Category>
-        <Date>{data.date}</Date>
+        <Date>{props.date}</Date>
       </Footer>
     </Container>
   );
