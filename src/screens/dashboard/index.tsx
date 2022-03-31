@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import 'intl';
+import 'intl/locale-data/jsonp/pt-BR';
+
 import { HighLightCard } from '../../components/HighLightCard';
 import { TransactionCard, TransactionCardProps } from '../../components/TransactionCard';
 
@@ -21,7 +24,6 @@ import {
   Title,
   TransactionsList,
 } from './styles';
-import { Alert } from 'react-native';
 
 export interface DataListProps extends TransactionCardProps {
   id: string;
@@ -49,17 +51,17 @@ export const Dashboard = () => {
         currency: 'BRL'
       });
 
-      // const date = Intl.DateTimeFormat('pt-BR', {
-      //   day: '2-digit',
-      //   month: '2-digit',
-      //   year: '2-digit'
-      // }).format(new Date(item.date));
+      const date = Intl.DateTimeFormat('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: '2-digit'
+      }).format(new Date(item.date));
 
       return {
         id: item.id,
         name: item.name,
         amount,
-        date: item.date,
+        date: date,
         category: item.category,
         type: item.type,
       }
