@@ -12,12 +12,12 @@ type HighLightCardProps = {
   title: string;
   amount:string;
   lastTransaction: string;
-  typeTransaction: 'up' | 'down' | 'total';
+  typeTransaction: 'positive' | 'negative' | 'total';
 }
 
 const iconTransactionType = {
-  up: 'arrow-up-circle',
-  down: 'arrow-down-circle',
+  positive: 'arrow-up-circle',
+  negative: 'arrow-down-circle',
   total: 'dollar-sign'
 }
 

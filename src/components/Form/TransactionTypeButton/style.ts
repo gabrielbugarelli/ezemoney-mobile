@@ -3,7 +3,7 @@ import { Feather } from '@expo/vector-icons';
 import { RFValue } from 'react-native-responsive-fontsize';
 
 type TransactionType = {
-  type: 'receita' | 'despesa';
+  type: 'positive' | 'negative';
   isActive?: boolean;
 }
 
@@ -15,14 +15,14 @@ export const Container = styled.TouchableOpacity<TransactionType>`
   width: 48%;
   padding: 18px;
 
-  border: 1.5px solid ${({theme, type}) => type === 'receita' ? theme.colors.success_light : theme.colors.attention_light}; 
+  border: 1.5px solid ${({theme, type}) => type === 'positive' ? theme.colors.success_light : theme.colors.attention_light}; 
   border-radius: 5px;
 
-  ${({isActive, type}) => isActive && type === 'receita' && css`
+  ${({isActive, type}) => isActive && type === 'positive' && css`
     background-color: ${({theme}) => theme.colors.success_light};
   `};
 
-  ${({isActive, type}) => isActive && type === 'despesa' && css`
+  ${({isActive, type}) => isActive && type === 'negative' && css`
     background-color: ${({theme}) => theme.colors.attention_light};
   `};
 `;
@@ -31,7 +31,7 @@ export const Icon = styled(Feather)<TransactionType>`
   font-size: ${RFValue(20)}px;
   margin-right: 12px;
   
-  color: ${({theme, type}) => type === 'receita' ? theme.colors.success : theme.colors.attention };
+  color: ${({theme, type}) => type === 'positive' ? theme.colors.success : theme.colors.attention };
 `;
 
 export const Title = styled.Text`

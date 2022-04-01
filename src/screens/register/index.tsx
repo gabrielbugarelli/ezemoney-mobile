@@ -55,7 +55,7 @@ export const Register = () => {
     resolver: yupResolver(schema)
   });
 
-  const handleTransactionTypeSelect = (type: 'receita' | 'despesa') => {
+  const handleTransactionTypeSelect = (type: 'positive' | 'negative') => {
     setTransactionType(type);
   } 
 
@@ -80,7 +80,7 @@ export const Register = () => {
       id: String(uuid.v4()),
       name: form.name,
       amount: form.amount,
-      transactionType,
+      type: transactionType,
       category: category.key,
       date: new Date()
     }
@@ -113,7 +113,7 @@ export const Register = () => {
 
   useEffect(() => {
     const loadData = async () => {
-      const data = await AsyncStorage.getItem(dataKey);
+      await AsyncStorage.getItem(dataKey);
     }
     
     loadData();
@@ -156,16 +156,16 @@ export const Register = () => {
             <TransactionsTypes>
               <TransactionTypeButton
                 title='Receita'
-                icon='receita'
-                onPress={()=> handleTransactionTypeSelect('receita')}
-                isActive={transactionType === 'receita'}
+                icon='positive'
+                onPress={()=> handleTransactionTypeSelect('positive')}
+                isActive={transactionType === 'positive'}
               />
 
               <TransactionTypeButton
                 title='Despesa'
-                icon='despesa'
-                onPress={()=> handleTransactionTypeSelect('despesa')}
-                isActive={transactionType === 'despesa'}
+                icon='negative'
+                onPress={()=> handleTransactionTypeSelect('negative')}
+                isActive={transactionType === 'negative'}
               />
             </TransactionsTypes>
 

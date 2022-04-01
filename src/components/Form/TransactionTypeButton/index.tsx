@@ -7,13 +7,13 @@ import {
 } from "./style";
 
 const iconType = {
-  receita: 'arrow-down-circle',
-  despesa: 'arrow-up-circle'
+  positive: 'arrow-down-circle',
+  negative: 'arrow-up-circle'
 }
 
 interface TransactionTypeButtonProps extends TouchableOpacityProps {
   title: string;
-  icon: 'receita' | 'despesa';
+  icon: 'positive' | 'negative';
   isActive: boolean;
 }
 

@@ -11,7 +11,7 @@ import {
 } from "./styles";
 
 export type TransactionCardProps = {
-  type: 'receita' | 'despesa';
+  type: 'positive' | 'negative';
   name: string;
   amount: string;
   category: string;
@@ -28,7 +28,7 @@ export const TransactionCard = ( props: TransactionCardProps ) => {
       <Title>{props.name}</Title>
 
       <Amount type={props.type} >
-      {props.type === 'despesa' && '- '}
+      {props.type === 'negative' && '- '}
       {props.amount}
       </Amount>
 

@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useCallback, useState } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import 'intl';
@@ -38,14 +39,6 @@ export const Dashboard = () => {
     const transactions = response ? JSON.parse(response) : [];
 
     const transactionsFormatted: DataListProps[] = transactions.map((item: DataListProps) => {
-      /**
-       * @description CORRIGIR BUG:
-       * Listar o valor da transaction formatada em Real
-       * 
-       * @description CORRIGIR BUG:
-       * Listar o data da transaction formatada
-       */
-
       const amount = Number(item.amount).toLocaleString('pt-BR', {
         style: 'currency',
         currency: 'BRL'
@@ -74,6 +67,10 @@ export const Dashboard = () => {
     loadTransactions();
   }, []);
 
+  useFocusEffect(useCallback(() => {
+    loadTransactions();
+  }, []));
+
   return (
     <Container>
       <Header>
@@ -97,14 +94,14 @@ export const Dashboard = () => {
           title="Entradas"
           amount="R$: 10.345,00"
           lastTransaction="10/02/2022"
-          typeTransaction='down'
+          typeTransaction='negative'
         />
         
         <HighLightCard
           title="Despesas"
           amount="R$: 3.800,00"
           lastTransaction="16/03/2022"
-          typeTransaction='up'
+          typeTransaction='positive'
         />
 
         <HighLightCard
