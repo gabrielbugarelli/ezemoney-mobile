@@ -1,3 +1,4 @@
+import { categories } from "../../utils/categories";
 import { 
   Container,
   Title,
@@ -9,20 +10,19 @@ import {
   Date
 } from "./styles";
 
-type CategoryProps = {
-  type: string;
-  icon: string;
-}
-
 export type TransactionCardProps = {
-    type: 'receita' | 'despesa';
-    name: string,
-    amount: string,
-    category: CategoryProps,
-    date: string,
+  type: 'receita' | 'despesa';
+  name: string;
+  amount: string;
+  category: string;
+  date: string;
 }
 
 export const TransactionCard = ( props: TransactionCardProps ) => {
+  const [ category ] = categories.filter(item => {
+    return item.key === props.category;
+  });
+
   return (
     <Container>
       <Title>{props.name}</Title>
@@ -34,8 +34,8 @@ export const TransactionCard = ( props: TransactionCardProps ) => {
 
       <Footer>
         <Category>
-          <Icon name={props.category.icon} />
-          <CategoryName>{props.category.type}</CategoryName>
+          <Icon name={category.icon} />
+          <CategoryName>{category.key}</CategoryName>
         </Category>
         <Date>{props.date}</Date>
       </Footer>
