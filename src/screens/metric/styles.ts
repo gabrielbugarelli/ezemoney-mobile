@@ -22,23 +22,6 @@ export const Title = styled.Text`
   color: ${({theme}) => theme.colors.shape};
 `;
 
-export const Form = styled.View`
-  flex: 1;
-  justify-content: space-between;
-
-  width: 100%;
-  padding: 24px;
-`;
-
-export const Fields = styled.View`
-`;
-
-export const TransactionsTypes = styled.View`
-  width: 100%;
-  margin-top: 8px;
-  margin-bottom: 24px;
-
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-`;
+export const Content = styled.ScrollView.attrs({
+  contentContainerStyle: {flex: 1, padding: 24}
+})``;
