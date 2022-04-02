@@ -4,6 +4,7 @@ import { useTheme } from 'styled-components';
 
 import { Dashboard } from '../screens/dashboard';
 import { Register } from '../screens/register';
+import { Metric } from '../screens/metric';
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -50,7 +51,7 @@ export const AppRoutes = () => {
       
       <Screen 
         name="Métricas"
-        component={Register}
+        component={Metric}
         options={{
           tabBarIcon: (({size, color}) =>
             <MaterialIcons
