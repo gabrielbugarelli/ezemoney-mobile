@@ -35,6 +35,7 @@ export interface DataListProps extends TransactionCardProps {
 
 type HighlightProps = {
   amount: string;
+  lastTransaction: string;
 };
 
 type HightlightData = {
@@ -50,6 +51,23 @@ export const Dashboard = () => {
   const [ isLoading, setIsLoading ] = useState(true);
   const [ transactions, setTransactions ] = useState<DataListProps[]>([]);
   const [ highlightData, setHighlightData ] = useState<HightlightData>({} as HightlightData);
+
+  const getLastTransactionData = (collection: DataListProps[], type: "positive" | "negative") => {
+    
+    const lastTransaction = new Date(
+      Math.max.apply(Math, collection
+        .filter(transaction => transaction.type === type)
+        .map(transaction => new Date(transaction.date).getTime()))
+    )
+
+    const lastTransactionsFormatted = Intl.DateTimeFormat("pt-BR", {
+      day: '2-digit',
+      month: 'long',
+      year: '2-digit'
+    }).format(new Date(lastTransaction));
+
+    return lastTransactionsFormatted;
+  }
 
   const loadTransactions = async () => {
     const response = await AsyncStorage.getItem(dataKey);
@@ -72,7 +90,7 @@ export const Dashboard = () => {
 
       const date = Intl.DateTimeFormat('pt-BR', {
         day: '2-digit',
-        month: '2-digit',
+        month: 'long',
         year: '2-digit'
       }).format(new Date(item.date));
 
@@ -88,6 +106,10 @@ export const Dashboard = () => {
 
     setTransactions(transactionsFormatted);
 
+    const lastTransactionEntries = getLastTransactionData(transactions, "positive");
+    const lastTransactionExpensives = getLastTransactionData(transactions, "negative");
+    const totalInterval = `dia 1 à ${lastTransactionExpensives}`;
+
     const total = entriesTotal - expensiveTotal;
 
     setHighlightData({
@@ -95,19 +117,22 @@ export const Dashboard = () => {
         amount: entriesTotal.toLocaleString('pt-BR', {
           style: 'currency',
           currency: 'BRL'
-        })
+        }),
+        lastTransaction: `Última entrada ${lastTransactionEntries}`
       },
       expensive: {
         amount: expensiveTotal.toLocaleString('pt-BR', {
           style: 'currency',
           currency: 'BRL'
-        })
+        }),
+        lastTransaction: `Última saída ${lastTransactionExpensives}`
       },
       total: {
         amount: total.toLocaleString('pt-BR', {
           style: 'currency',
           currency: 'BRL'
-        })
+        }),
+        lastTransaction: totalInterval
       }
     })
 
@@ -152,21 +177,21 @@ export const Dashboard = () => {
               <HighLightCard
                 title="Entradas"
                 amount={highlightData.entries.amount}
-                lastTransaction="10/02/2022"
+                lastTransaction={highlightData.entries.lastTransaction}
                 typeTransaction='negative'
               />
               
               <HighLightCard
                 title="Despesas"
                 amount={highlightData.expensive.amount}
-                lastTransaction="16/03/2022"
+                lastTransaction={highlightData.expensive.lastTransaction}
                 typeTransaction='positive'
               />
 
               <HighLightCard
                 title="Receita Total"
                 amount={highlightData.total.amount}
-                lastTransaction="16/03/2022"
+                lastTransaction={highlightData.total.lastTransaction}
                 typeTransaction='total'
               />
             </HighLightCards>
