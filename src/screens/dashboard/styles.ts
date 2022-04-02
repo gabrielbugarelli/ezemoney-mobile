@@ -100,3 +100,9 @@ export const TransactionsList = styled(
   FlatList as new () => FlatList<DataListProps>
   )
 ``;
+
+export const LoadContainer = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
