@@ -1,21 +1,25 @@
-import { RFValue } from "react-native-responsive-fontsize";
+import { RFValue } from 'react-native-responsive-fontsize';
 import { Feather } from '@expo/vector-icons';
-import styled from "styled-components/native";
+import styled from 'styled-components/native';
+import theme from '../../global/styles/theme';
 
-type TypeProps ={
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
+
+interface CategoryProps {
   isActive: boolean;
 }
 
-export const Container = styled.View`
+export const Container = styled(GestureHandlerRootView)`
   flex: 1;
-  background-color: ${({theme}) => theme.colors.background};
+  background-color: ${({ theme }) => theme.colors.background};
 `;
 
 export const Header = styled.View`
   width: 100%;
-  height: ${(RFValue(113))}px;
+  height: ${RFValue(113)}px;
 
-  background-color: ${({theme}) => theme.colors.primary};
+  background-color: ${({ theme }) => theme.colors.primary};
 
   align-items: center;
   justify-content: flex-end;
@@ -23,37 +27,37 @@ export const Header = styled.View`
 `;
 
 export const Title = styled.Text`
-  font-family: ${({theme}) => theme.fonts.regular};
-  font-size: ${RFValue(16)}px;
-  color: ${({theme}) => theme.colors.shape};
+  font-family: ${({ theme }) => theme.fonts.regular};
+  color: ${({ theme }) => theme.colors.shape};
+  font-size: ${RFValue(18)}px;
 `;
 
-export const Category = styled.TouchableOpacity`
+export const Category = styled.TouchableOpacity<CategoryProps>`
   width: 100%;
   padding: ${RFValue(15)}px;
 
   flex-direction: row;
   align-items: center;
+
+  background-color: ${({ isActive }) =>
+    isActive ? theme.colors.secondary_light : theme.colors.background
+  };
 `;
 
-export const Icon = styled(Feather)<TypeProps>`
-  font-size: ${RFValue(25)}px;
-  margin-right:16px;
-
-  color: ${({theme, isActive}) => isActive ? theme.colors.success : theme.colors.text_dark};
+export const Icon = styled(Feather)`
+  font-size: ${RFValue(20)}px;
+  margin-right: 16px;
 `;
 
-export const Name = styled.Text<TypeProps>`
-  font-family: ${({theme}) => theme.fonts.regular};
-  font-size: ${RFValue(16)}px;
-
-  color: ${({theme, isActive}) => isActive ? theme.colors.success : theme.colors.text_dark};
+export const Name = styled.Text`
+  font-family: ${({ theme }) => theme.fonts.regular};
+  font-size: ${RFValue(14)}px;
 `;
 
 export const Separator = styled.View`
   height: 1px;
   width: 100%;
-  background-color: ${({theme}) => theme.colors.text};
+  background-color:  ${({ theme }) => theme.colors.text};
 `;
 
 export const Footer = styled.View`

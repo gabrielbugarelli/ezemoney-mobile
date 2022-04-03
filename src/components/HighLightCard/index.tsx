@@ -1,3 +1,5 @@
+import React from 'react';
+
 import {
   Container,
   Header,
@@ -5,39 +7,50 @@ import {
   Icon,
   Footer,
   Amount,
-  LastTransaction
+  LastTransaction,
 } from './styles';
 
-type HighLightCardProps = {
+interface Props {
+  type: 'up' | 'down' | 'total';
   title: string;
-  amount:string;
+  amount: string;
   lastTransaction: string;
-  typeTransaction: 'positive' | 'negative' | 'total';
 }
 
-const iconTransactionType = {
-  positive: 'arrow-up-circle',
-  negative: 'arrow-down-circle',
+const icon = {
+  up: 'arrow-up-circle',
+  down: 'arrow-down-circle',
   total: 'dollar-sign'
 }
 
-export const HighLightCard = ({ title, amount, lastTransaction, typeTransaction }: HighLightCardProps) => {
 
+export function HighlightCard({
+  type,
+  title,
+  amount,
+  lastTransaction
+} : Props){
   return (
-    <Container type={typeTransaction}>
+    <Container type={type}>
       <Header>
-        <Title type={typeTransaction}> {title} </Title>
-
+        <Title type={type}>
+          {title}
+        </Title>
         <Icon
-          name={iconTransactionType[typeTransaction]}
-          type={typeTransaction}
+          name={icon[type]}
+          type={type}
         />
       </Header>
 
       <Footer>
-        <Amount type={typeTransaction}> {amount} </Amount>
-        <LastTransaction type={typeTransaction}> {lastTransaction} </LastTransaction>
+        <Amount type={type}>
+          {amount}
+        </Amount>
+        <LastTransaction type={type}>
+          {lastTransaction}
+        </LastTransaction>
       </Footer>
+
     </Container>
   )
 }
