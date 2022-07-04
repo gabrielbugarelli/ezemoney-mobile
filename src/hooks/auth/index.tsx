@@ -21,7 +21,7 @@ export const AuthProvider = ({children}: AuthProviderProps) => {
   const user: User = {
     id: String(Math.random()),
     name: 'Gabriel',
-    email: 'email@email.com'
+    email: 'gabriel@email.com'
   }
 
   return (
