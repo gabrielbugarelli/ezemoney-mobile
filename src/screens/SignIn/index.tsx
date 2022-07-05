@@ -26,8 +26,6 @@ export const SignIn = () => {
       await signInWithGoogle();
     } catch (error) {
       console.log(error);
-      Alert.alert(`Houve um erro: ${error}`);
-      
     }
   }
 
